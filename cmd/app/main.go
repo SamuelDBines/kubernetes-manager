@@ -6,10 +6,10 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/SamuelDBines/kubernetes-manager/pkg/env"
 	"github.com/SamuelDBines/kubernetes-manager/pkg/httpserver"
 	"github.com/SamuelDBines/kubernetes-manager/pkg/httpserver/handlers/health"
-	"github.com/SamuelDBines/kubernetes-manager/pkg/utils/env"
-	"github.com/SamuelDBines/kubernetes-manager/pkg/utils/lifecycle"
+	"github.com/SamuelDBines/kubernetes-manager/pkg/lifecycle"
 )
 
 type Config struct {
