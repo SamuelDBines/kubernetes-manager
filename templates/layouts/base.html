@@ -1,0 +1,58 @@
+{{ define "layout/base" }}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>{{ if .Title }}{{ .Title }} — {{ end }}Kube Config</title>
+
+    <link rel="stylesheet" href="/static/css/app.css" />
+    <script defer src="/static/js/app.js"></script>
+  </head>
+
+  <body>
+    <header class="topbar">
+      <div class="container topbar__inner">
+        <a class="brand" href="/">
+          <span class="brand__dot"></span>
+          <span class="brand__text">Kube Config</span>
+        </a>
+
+        <nav class="nav">
+          <a class="nav__link {{ if eq .Route "index" }}is-active{{ end }}" href="/">Namespaces</a>
+          {{/* Later: settings/import/export */}}
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      {{ if .Flash }}
+        <div class="alert">{{ .Flash }}</div>
+      {{ end }}
+
+      <div class="pagehead">
+        <div class="pagehead__title">
+          <h1>{{ .Heading }}</h1>
+          {{ if .Subheading }}<p class="muted">{{ .Subheading }}</p>{{ end }}
+        </div>
+
+        {{ if .Actions }}
+          <div class="pagehead__actions">
+            {{ .Actions }}
+          </div>
+        {{ end }}
+      </div>
+
+      <section class="card">
+        {{ template "content" . }}
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer__inner">
+        <span class="muted">Generated configs live under <code>out/</code></span>
+      </div>
+    </footer>
+  </body>
+</html>
+{{ end }}

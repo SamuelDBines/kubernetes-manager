@@ -1,0 +1,50 @@
+{{ define "content" }}
+<div class="stack">
+  <div class="toolbar">
+    <div class="search">
+      <input id="ns-search" class="input" type="search" placeholder="Search namespaces…" autocomplete="off" />
+    </div>
+
+    <div class="toolbar__right">
+      <a class="btn" href="/generate">Generate</a>
+      <a class="btn btn--primary" href="/new">New namespace</a>
+    </div>
+  </div>
+
+  {{ if not .Namespaces }}
+    <div class="empty">
+      <h3>No namespaces found</h3>
+      <p class="muted">Create one by generating output, or add a folder under <code>out/</code>.</p>
+      <div class="actions">
+        <a class="btn btn--primary" href="/generate">Generate now</a>
+      </div>
+    </div>
+  {{ else }}
+    <div class="grid" id="ns-grid">
+      {{ range .Namespaces }}
+        <a class="tile" href="/ns/{{ .Name }}">
+          <div class="tile__top">
+            <div class="tile__title">{{ .Name }}</div>
+            <div class="pill">{{ .ItemCount }} files</div>
+          </div>
+
+          <div class="tile__meta">
+            <div class="meta-row">
+              <span class="muted">Updated</span>
+              <span>{{ .UpdatedHuman }}</span>
+            </div>
+            <div class="meta-row">
+              <span class="muted">Path</span>
+              <code>out/{{ .Name }}</code>
+            </div>
+          </div>
+        </a>
+      {{ end }}
+    </div>
+  {{ end }}
+</div>
+{{ end }}
+
+{{ define "pages/index" }}
+  {{ template "layout/base" . }}
+{{ end }}
